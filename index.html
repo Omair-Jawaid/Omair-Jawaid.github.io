@@ -1,975 +1,774 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Omair — Developer & Engineer</title>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <title>Omair Jawaid</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg: #0a0e1a;
-      --surface: #111827;
-      --surface2: #1a2235;
-      --green: #00ff88;
-      --blue: #38bdf8;
-      --purple: #a78bfa;
-      --yellow: #fbbf24;
-      --text: #e2e8f0;
-      --muted: #64748b;
-      --border: rgba(255,255,255,0.08);
+      --cream: #080e1a;
+      --cream2: #0f1829;
+      --cream3: #162035;
+      --ink: #e6edf3;
+      --ink2: #c9d1d9;
+      --ink3: #8b949e;
+      --ink4: #484f58;
+      --rule: #1e2d45;
+      --blue: #3b82f6;
+      --blue-light: rgba(59,130,246,0.12);
+      --serif: 'Sora', system-ui, sans-serif;
+      --sans: 'Sora', system-ui, sans-serif;
       --mono: 'JetBrains Mono', monospace;
-      --sans: 'Space Grotesk', sans-serif;
+      --green: #10b981;
+      --green-dim: rgba(16,185,129,0.12);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      overflow-x: hidden;
-    }
-
-    /* ── NOISE OVERLAY ── */
+    body { background: #080e1a; color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
     body::before {
       content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 999;
-    }
-
-    /* ── GRID BACKGROUND ── */
-    .grid-bg {
-      position: fixed;
-      inset: 0;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0; pointer-events: none;
       background-image:
-        linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+        linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
       background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 0;
     }
 
     /* ── NAV ── */
+    /* ── TOP BAR ── */
+    /* ── COMBINED NAV BAR ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 3rem;
-      background: rgba(10,14,26,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 101;
+      display: flex; align-items: center;
+      height: 54px;
+      padding: 0 2rem;
+      background: rgba(8,14,26,0.97);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--rule);
     }
-
-    .nav-logo {
-      font-family: var(--mono);
-      font-size: 1rem;
-      color: var(--green);
-      letter-spacing: 0.1em;
+    .nav-name {
+      font-size: 1.05rem; font-weight: 700; color: var(--ink);
+      letter-spacing: 0.01em; white-space: nowrap;
+      position: relative; z-index: 2;
     }
-
-    .nav-logo span { color: var(--muted); }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
+    .nav-tabs {
+      position: absolute; left: 0; right: 0;
+      display: flex; justify-content: center; align-items: center;
+      gap: 0; pointer-events: none;
     }
-
-    nav ul a {
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      transition: color 0.2s;
+    .nav-tabs a { pointer-events: all; }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+    .nav-tabs a {
+      display: inline-flex; align-items: center;
+      font-size: 0.76rem; font-weight: 500; color: var(--ink3);
+      text-decoration: none; letter-spacing: 0.03em;
+      padding: 0.6rem 1.1rem; height: 54px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+      white-space: nowrap;
     }
-
-    nav ul a:hover { color: var(--green); }
-
-    .nav-status {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--muted);
+    .nav-tabs a:hover {
+      color: var(--ink);
+      border-bottom-color: var(--ink3);
     }
-
-    .status-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--green);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
+    .nav-tabs a.active {
+      color: var(--blue);
+      border-bottom-color: var(--blue);
+      font-weight: 600;
     }
 
     /* ── SECTIONS ── */
-    section {
-      position: relative;
-      z-index: 1;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 6rem 2rem;
-    }
+    section { max-width: 1080px; margin: 0 auto; padding: 6rem 3rem; border-bottom: 1px solid var(--rule); scroll-margin-top: 70px; position: relative; z-index: 1; }
+    section:last-of-type { border-bottom: none; }
 
     /* ── HERO ── */
     #hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-top: 8rem;
+      min-height: 100vh; display: grid;
+      grid-template-columns: 1fr 370px;
+      gap: 3rem; align-items: center;
+      padding-top: 6.5rem; padding-bottom: 6rem;
     }
-
-    .hero-eyebrow {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      color: var(--green);
-      letter-spacing: 0.2em;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.6s 0.2s forwards;
+    .hero-left {}
+    .hero-kicker {
+      font-family: var(--mono); font-size: 0.67rem; color: var(--ink4);
+      letter-spacing: 0.16em; text-transform: uppercase;
+      margin-bottom: 1.4rem;
+      opacity: 0; animation: up 0.6s 0.1s forwards;
     }
-
     .hero-name {
-      font-size: clamp(4rem, 10vw, 8rem);
-      font-weight: 700;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.6s 0.4s forwards;
+      font-size: clamp(3rem, 6.5vw, 5.5rem);
+      font-weight: 700; line-height: 1.04; letter-spacing: -0.03em;
+      color: var(--ink); margin-bottom: 1.2rem;
+      opacity: 0; animation: up 0.6s 0.22s forwards;
     }
-
-    .hero-name .accent { color: var(--green); }
-
-    .hero-tagline {
-      font-family: var(--mono);
-      font-size: clamp(0.9rem, 2vw, 1.1rem);
-      color: var(--muted);
-      max-width: 560px;
-      line-height: 1.7;
-      margin-bottom: 3rem;
-      opacity: 0;
-      animation: fadeUp 0.6s 0.6s forwards;
+    .hero-name em { font-style: italic; color: var(--ink2); }
+    .hero-sub {
+      font-size: 0.9rem; color: var(--ink3); line-height: 1.8;
+      max-width: 420px; margin-bottom: 2.5rem;
+      opacity: 0; animation: up 0.6s 0.34s forwards;
     }
-
-    .hero-tagline .hl { color: var(--blue); }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.6s 0.8s forwards;
+    .hero-pills {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem;
+      opacity: 0; animation: up 0.6s 0.46s forwards;
     }
-
+    .pill {
+      font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.04em;
+      padding: 0.3rem 0.85rem; border-radius: 2px;
+      border: 1px solid var(--rule); color: var(--ink3); background: var(--cream2);
+    }
+    .pill.hi { border-color: rgba(59,130,246,0.35); color: var(--blue); background: var(--blue-light); }
+    .hero-cta { display: flex; gap: 0.8rem; opacity: 0; animation: up 0.6s 0.56s forwards; }
     .btn {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      padding: 0.8rem 1.8rem;
-      border-radius: 4px;
-      text-decoration: none;
-      letter-spacing: 0.1em;
-      transition: all 0.2s;
-      border: 1px solid transparent;
-      cursor: pointer;
+      font-family: var(--sans); font-size: 0.8rem; font-weight: 500;
+      padding: 0.65rem 1.4rem; border-radius: 3px;
+      text-decoration: none; transition: all 0.15s;
+      border: 1px solid transparent; cursor: pointer;
+      letter-spacing: 0.02em;
     }
+    .btn-primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .btn-primary:hover { background: #2563eb; }
+    .btn-ghost { background: transparent; border-color: var(--rule); color: var(--ink3); }
+    .btn-ghost:hover { border-color: var(--ink3); color: var(--ink); }
 
-    .btn-primary {
-      background: var(--green);
-      color: var(--bg);
-      font-weight: 700;
-    }
-
-    .btn-primary:hover {
-      background: transparent;
-      border-color: var(--green);
-      color: var(--green);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      border-color: var(--border);
-      color: var(--muted);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-    }
-
-    /* floating terminal */
+    /* terminal card */
     .hero-terminal {
-      position: absolute;
-      right: 2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 380px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      opacity: 0;
-      animation: fadeLeft 0.8s 1s forwards;
-      box-shadow: 0 0 60px rgba(0,255,136,0.06);
+      background: #071020; border-radius: 8px; overflow: hidden;
+      border: 1px solid rgba(59,130,246,0.25);
+      box-shadow: 0 0 60px rgba(59,130,246,0.18), 0 0 120px rgba(59,130,246,0.08), 0 20px 60px rgba(0,0,0,0.5);
+      opacity: 0; animation: slideIn 0.7s 0.7s forwards;
     }
+    .t-bar { background: #040d1a; padding: 0.65rem 1rem; display: flex; align-items: center; gap: 0.4rem; border-bottom: 1px solid rgba(59,130,246,0.2); }
+    .t-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .t-r{background:#ff5f57}.t-y{background:#febc2e}.t-g{background:#28c840}
+    .t-title { font-family: var(--mono); font-size: 0.64rem; color: #555; margin-left: 0.4rem; }
+    .t-body { padding: 1.2rem 1.4rem; font-family: var(--mono); font-size: 0.71rem; line-height: 1.95; color: #7ea8d8; }
+    .t-p { color: #34d399; }
+    .t-k { color: #60a5fa; }
+    .t-v { color: #fbbf24; }
+    .t-c { display: inline-block; width: 7px; height: 12px; background: #34d399; animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 1px; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-    .terminal-bar {
-      background: var(--surface2);
-      padding: 0.7rem 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .t-dot { width: 12px; height: 12px; border-radius: 50%; }
-    .t-red { background: #ff5f57; }
-    .t-yellow { background: #febc2e; }
-    .t-green { background: #28c840; }
-
-    .terminal-title {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-left: 0.5rem;
-    }
-
-    .terminal-body {
-      padding: 1.5rem;
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      line-height: 1.8;
-    }
-
-    .t-line { display: flex; gap: 0.5rem; }
-    .t-prompt { color: var(--green); }
-    .t-cmd { color: var(--text); }
-    .t-out { color: var(--muted); padding-left: 1rem; }
-    .t-key { color: var(--blue); }
-    .t-val { color: var(--yellow); }
-    .t-cursor {
-      display: inline-block;
-      width: 8px; height: 14px;
-      background: var(--green);
-      animation: blink 1s infinite;
-      vertical-align: middle;
-    }
-    @keyframes blink { 0%,49% { opacity:1 } 50%,100% { opacity:0 } }
-
-    /* ── SECTION HEADERS ── */
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      margin-bottom: 3.5rem;
-    }
-
-    .section-num {
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      color: var(--green);
-      letter-spacing: 0.1em;
-    }
-
-    .section-title {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .section-line {
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
+    /* ── SECTION HEADER ── */
+    .sh { display: flex; align-items: baseline; gap: 1.4rem; margin-bottom: 3rem; }
+    .sh-num { font-family: var(--mono); font-size: 0.62rem; color: var(--ink4); letter-spacing: 0.1em; flex-shrink: 0; }
+    .sh-title { font-size: 1.6rem; font-weight: 600; color: var(--ink); letter-spacing: -0.02em; }
+    .sh-rule { flex: 1; height: 1px; background: var(--rule); }
 
     /* ── ABOUT ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
+    .about-wrap { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; }
+    .about-body p { font-size: 0.92rem; color: var(--ink2); line-height: 1.88; margin-bottom: 1.1rem; }
+    .about-body p strong { color: var(--ink); font-weight: 500; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+    .s-cell { padding: 1.3rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .s-cell:nth-child(even) { border-right: none; }
+    .s-cell:nth-last-child(-n+2) { border-bottom: none; }
+    .s-num { font-size: 1.8rem; font-weight: 700; color: var(--blue); line-height: 1; margin-bottom: 0.15rem; }
+    .s-lab { font-size: 0.71rem; color: var(--ink4); letter-spacing: 0.04em; }
 
-    .about-text p {
-      color: var(--muted);
-      line-height: 1.85;
-      font-size: 1rem;
-      margin-bottom: 1.2rem;
+    /* ── EXP ── */
+    .exp-list { display: flex; flex-direction: column; }
+    .exp-row {
+      display: grid; grid-template-columns: 160px 1fr auto;
+      gap: 2rem; align-items: start;
+      padding: 1.6rem 0; border-bottom: 1px solid var(--rule);
+      transition: background 0.15s;
     }
+    .exp-row:first-child { border-top: 1px solid var(--rule); }
+    .exp-row:hover { background: var(--cream3); margin: 0 -1rem; padding-left: 1rem; padding-right: 1rem; border-radius: 4px; }
+    .exp-date-col { font-family: var(--mono); font-size: 0.65rem; color: var(--ink4); line-height: 1.5; padding-top: 0.15rem; }
+    .exp-org-name { font-size: 0.7rem; color: var(--ink3); margin-top: 0.3rem; }
+    .exp-role { font-size: 0.92rem; font-weight: 500; color: var(--ink); margin-bottom: 0.4rem; }
+    .exp-desc { font-size: 0.82rem; color: var(--ink3); line-height: 1.72; }
+    .bullet-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.3rem; }
+    .bullet-list li { font-size: 0.81rem; color: var(--ink3); line-height: 1.6; padding-left: 1rem; position: relative; }
+    .bullet-list li::before { content: '—'; position: absolute; left: 0; color: var(--blue); font-family: var(--mono); font-size: 0.72rem; top: 0.05rem; }
+    .exp-badge { font-family: var(--mono); font-size: 0.59rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 2px; border: 1px solid; flex-shrink: 0; margin-top: 0.12rem; }
+    .badge-work { color: #34d399; border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.08); }
+    .badge-vol { color: #a78bfa; border-color: rgba(167,139,250,0.3); background: rgba(167,139,250,0.08); }
 
-    .about-text p strong { color: var(--text); }
+    /* ── LEADERSHIP ── */
+    .lead-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+    .lead-cell { background: var(--cream2); padding: 1.6rem; transition: background 0.15s; }
+    .lead-cell:hover { background: var(--cream3); }
+    .lead-role { font-size: 0.9rem; font-weight: 500; color: var(--ink); margin-bottom: 0.15rem; }
+    .lead-org { font-family: var(--mono); font-size: 0.64rem; color: var(--ink4); margin-bottom: 0.55rem; }
+    .lead-desc { font-size: 0.8rem; color: var(--ink3); line-height: 1.68; }
 
-    .about-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.4rem;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-
-    .stat-card:hover {
-      border-color: var(--green);
-      transform: translateY(-2px);
-    }
-
-    .stat-num {
-      font-family: var(--mono);
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--green);
-      line-height: 1;
-      margin-bottom: 0.3rem;
-    }
-
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-    }
+    /* ── PROJECTS ── */
+    .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .proj-card { border: 1px solid var(--rule); border-radius: 4px; padding: 2rem; background: var(--cream2); transition: box-shadow 0.2s, transform 0.2s; }
+    .proj-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); transform: translateY(-2px); }
+    .proj-card.tbd { background: var(--cream2); border-style: dashed; }
+    .proj-card.tbd:hover { transform: none; box-shadow: none; }
+    .proj-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; }
+    .proj-cat { font-family: var(--mono); font-size: 0.62rem; color: var(--ink4); letter-spacing: 0.1em; text-transform: uppercase; }
+    .proj-live { font-family: var(--mono); font-size: 0.62rem; color: #34d399; background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.3); padding: 0.18rem 0.6rem; border-radius: 2px; }
+    .proj-soon { font-family: var(--mono); font-size: 0.62rem; color: var(--blue); background: var(--blue-light); border: 1px solid rgba(59,130,246,0.3); padding: 0.18rem 0.6rem; border-radius: 2px; }
+    .proj-name { font-size: 1.4rem; font-weight: 600; color: var(--ink); margin-bottom: 0.6rem; letter-spacing: -0.02em; }
+    .proj-desc { font-size: 0.83rem; color: var(--ink3); line-height: 1.72; margin-bottom: 1.2rem; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .ptag { font-family: var(--mono); font-size: 0.62rem; color: var(--ink3); background: var(--cream2); border: 1px solid var(--rule); padding: 0.2rem 0.55rem; border-radius: 2px; }
 
     /* ── SKILLS ── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .skill-category {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.8rem;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .skill-category:hover {
-      border-color: rgba(0,255,136,0.3);
-      box-shadow: 0 0 30px rgba(0,255,136,0.05);
-    }
-
-    .skill-cat-icon {
-      font-size: 1.6rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .skill-cat-title {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      color: var(--green);
-      letter-spacing: 0.1em;
-      margin-bottom: 1.2rem;
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .tag {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      padding: 0.3rem 0.7rem;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      transition: all 0.2s;
-    }
-
-    .tag:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-    }
-
-    /* ── EXPERIENCE ── */
-    .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
-
-    .exp-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 2rem;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 1rem;
-      align-items: start;
-      transition: border-color 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .exp-card::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: var(--green);
-      transform: scaleY(0);
-      transform-origin: bottom;
-      transition: transform 0.3s;
-    }
-
-    .exp-card:hover::before { transform: scaleY(1); }
-    .exp-card:hover { border-color: rgba(0,255,136,0.2); }
-
-    .exp-role {
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 0.2rem;
-    }
-
-    .exp-org {
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      color: var(--blue);
-      margin-bottom: 0.8rem;
-    }
-
-    .exp-desc {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .exp-date {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--muted);
-      white-space: nowrap;
-      background: var(--surface2);
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-    }
+    .skills-wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+    .sk-cell { background: var(--cream2); padding: 1.5rem; transition: background 0.15s; }
+    .sk-cell:hover { background: var(--cream3); }
+    .sk-label { font-family: var(--mono); font-size: 0.62rem; color: var(--ink4); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.9rem; }
+    .sk-tags { display: flex; flex-wrap: wrap; gap: 0.38rem; }
+    .sk-tag { font-size: 0.78rem; color: var(--ink2); background: var(--cream2); border: 1px solid var(--rule); padding: 0.22rem 0.6rem; border-radius: 2px; }
 
     /* ── AWARDS ── */
-    .awards-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
+    .awards-list { display: flex; flex-direction: column; }
+    .award-row {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 2rem; align-items: start;
+      padding: 1.5rem 0; border-bottom: 1px solid var(--rule);
     }
+    .award-row:first-child { border-top: 1px solid var(--rule); }
+    .award-row.feat { background: rgba(245,158,11,0.07); margin: 0 -1rem; padding-left: 1rem; padding-right: 1rem; }
+    .award-name { font-size: 0.92rem; font-weight: 500; color: var(--ink); margin-bottom: 0.15rem; }
+    .award-org { font-family: var(--mono); font-size: 0.65rem; color: var(--ink4); margin-bottom: 0.4rem; }
+    .award-desc { font-size: 0.8rem; color: var(--ink3); line-height: 1.68; }
+    .award-tag { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.06em; padding: 0.22rem 0.65rem; border-radius: 2px; border: 1px solid rgba(245,158,11,0.3); background: rgba(245,158,11,0.07); color: #92400e; white-space: nowrap; flex-shrink: 0; align-self: start; }
 
-    .award-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.8rem;
-      display: flex;
-      gap: 1.2rem;
-      align-items: flex-start;
-      transition: all 0.2s;
-    }
-
-    .award-card:hover {
-      border-color: var(--yellow);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(251,191,36,0.08);
-    }
-
-    .award-icon {
-      font-size: 1.8rem;
-      flex-shrink: 0;
-      margin-top: 0.1rem;
-    }
-
-    .award-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-    }
-
-    .award-org {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--yellow);
-      margin-bottom: 0.5rem;
-    }
-
-    .award-desc {
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
+    /* ── ATHLETICS ── */
+    .ath-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .ath-hero { grid-column: 1 / -1; border: 1px solid var(--rule); border-radius: 4px; padding: 2.5rem; background: var(--cream2); display: grid; grid-template-columns: 1px 1fr; gap: 2.5rem; }
+    .ath-accent-bar { background: var(--blue); border-radius: 2px; }
+    .ath-hero-title { font-size: 1.3rem; font-weight: 600; color: var(--ink); margin-bottom: 0.3rem; letter-spacing: -0.01em; }
+    .ath-hero-sub { font-family: var(--mono); font-size: 0.65rem; color: var(--ink4); letter-spacing: 0.08em; margin-bottom: 0.9rem; }
+    .ath-hero-desc { font-size: 0.86rem; color: var(--ink3); line-height: 1.78; }
+    .ath-card { border: 1px solid var(--rule); border-radius: 4px; padding: 1.4rem 1.5rem; background: var(--cream2); transition: background 0.15s; }
+    .ath-card:hover { background: var(--cream3); }
+    .ath-label { font-family: var(--mono); font-size: 0.62rem; color: var(--ink4); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .ath-val { font-size: 0.9rem; font-weight: 500; color: var(--ink); margin-bottom: 0.25rem; }
+    .ath-desc { font-size: 0.79rem; color: var(--ink3); line-height: 1.6; }
 
     /* ── CONTACT ── */
-    .contact-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    .contact-intro {
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.85;
-      margin-bottom: 2rem;
-    }
-
-    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
-
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-decoration: none;
-      color: var(--text);
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      padding: 1rem 1.2rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      transition: all 0.2s;
-    }
-
-    .contact-link:hover {
-      border-color: var(--green);
-      color: var(--green);
-      transform: translateX(4px);
-    }
-
-    .cl-icon { font-size: 1.1rem; }
-
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contact-lede { font-size: 0.92rem; color: var(--ink3); line-height: 1.85; margin-bottom: 2rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+    .c-link { display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: var(--ink2); font-size: 0.84rem; padding: 1rem 1.2rem; border-bottom: 1px solid var(--rule); background: var(--cream2); transition: background 0.15s; }
+    .c-link:last-child { border-bottom: none; }
+    .c-link:hover { background: var(--cream3); color: var(--ink); }
+    .c-link-label { font-family: var(--mono); font-size: 0.62rem; color: var(--ink4); letter-spacing: 0.08em; }
+    .c-arrow { font-size: 0.7rem; color: var(--ink4); transition: transform 0.15s; }
+    .c-link:hover .c-arrow { transform: translateX(2px); }
     .contact-form { display: flex; flex-direction: column; gap: 1rem; }
-
-    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-
-    .form-group label {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 0.8rem 1rem;
-      color: var(--text);
-      font-family: var(--mono);
-      font-size: 0.82rem;
-      outline: none;
-      transition: border-color 0.2s;
-      resize: vertical;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: var(--green);
-    }
-
-    .form-group textarea { min-height: 100px; }
+    .fg { display: flex; flex-direction: column; gap: 0.35rem; }
+    .fg label { font-family: var(--mono); font-size: 0.62rem; color: var(--ink4); letter-spacing: 0.1em; text-transform: uppercase; }
+    .fg input, .fg textarea { background: var(--cream2); border: 1px solid var(--rule); border-radius: 3px; padding: 0.7rem 0.9rem; color: var(--ink); font-family: var(--sans); font-size: 0.84rem; outline: none; transition: border-color 0.15s; resize: vertical; }
+    .fg input:focus, .fg textarea:focus { border-color: var(--ink2); }
+    .fg textarea { min-height: 88px; }
 
     /* ── FOOTER ── */
-    footer {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 3rem 2rem;
-      border-top: 1px solid var(--border);
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    footer span { color: var(--green); }
+    footer { max-width: 1080px; margin: 0 auto; padding: 2.5rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+    .ft-name { font-size: 0.85rem; font-weight: 500; color: var(--ink3); }
+    .ft-copy { font-family: var(--mono); font-size: 0.63rem; color: var(--ink4); }
 
     /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes up { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+    @keyframes slideIn { from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:none} }
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
 
-    @keyframes fadeLeft {
-      from { opacity: 0; transform: translateY(-50%) translateX(30px); }
-      to   { opacity: 1; transform: translateY(-50%) translateX(0); }
-    }
+    ::-webkit-scrollbar{width:5px} ::-webkit-scrollbar-track{background:var(--cream)} ::-webkit-scrollbar-thumb{background:var(--rule)}
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
-
-    /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--green); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 1rem 1.5rem; }
-      nav ul { display: none; }
+    @media(max-width:960px){
+      nav { padding: 0 1rem; }
+      .nav-name { font-size: 0.85rem; padding-right: 1rem; }
+      .nav-tabs a { padding: 0.55rem 0.65rem; font-size: 0.68rem; }
+      #hero { grid-template-columns: 1fr; }
       .hero-terminal { display: none; }
-      .about-grid, .contact-wrapper { grid-template-columns: 1fr; gap: 2rem; }
-      .skills-grid { grid-template-columns: 1fr 1fr; }
-      .awards-grid { grid-template-columns: 1fr; }
+      .about-wrap, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .skills-wrap { grid-template-columns: 1fr 1fr; }
+      .ath-wrap, .awards-grid, .lead-grid { grid-template-columns: 1fr; }
+      .ath-hero { grid-template-columns: 1fr; }
+      .ath-accent-bar { display: none; }
+      section { padding: 5rem 1.5rem; }
     }
-
-    @media (max-width: 600px) {
-      .skills-grid { grid-template-columns: 1fr; }
+    @media(max-width:600px){
+      .skills-wrap, .proj-grid { grid-template-columns: 1fr; }
+      .exp-row { grid-template-columns: 1fr; gap: 0.5rem; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="grid-bg"></div>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-logo">omair<span>.dev</span></div>
-    <ul>
-      <li><a href="#about">about</a></li>
-      <li><a href="#skills">skills</a></li>
-      <li><a href="#experience">experience</a></li>
-      <li><a href="#awards">awards</a></li>
-      <li><a href="#contact">contact</a></li>
-    </ul>
-    <div class="nav-status">
-      <div class="status-dot"></div>
-      open to opportunities
+<!-- NAV -->
+<nav id="tabnav">
+  <div class="nav-name">Omair Jawaid</div>
+  <div class="nav-tabs">
+    <a href="#about" class="tab-link active">About</a>
+    <a href="#experience" class="tab-link">Experience</a>
+    <a href="#leadership" class="tab-link">Leadership</a>
+    <a href="#projects" class="tab-link">Projects</a>
+    <a href="#skills" class="tab-link">Skills</a>
+    <a href="#awards" class="tab-link">Awards</a>
+    <a href="#athletics" class="tab-link">Athletics</a>
+    <a href="#contact" class="tab-link">Contact</a>
+  </div>
+  <div class="nav-spacer"></div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-kicker">Grade 11 · White Oaks Secondary School</p>
+    <h1 class="hero-name">Omair Jawaid</h1>
+    <p class="hero-sub">Aspiring engineer and builder. I lead robotics teams, compete in business strategy, coach youth athletes, and ship real projects — always looking for the next challenge.</p>
+    <div class="hero-pills">
+      <span class="pill hi">VEX Robotics Captain</span>
+      <span class="pill hi">DECA Ontario Champion</span>
+      <span class="pill">Rep Hockey · 5 yrs</span>
+      <span class="pill">BMT Club Founder</span>
+      <span class="pill">Electrathon EV</span>
     </div>
-  </nav>
-
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-eyebrow">// hello world — i'm</div>
-    <h1 class="hero-name">Omair<br><span class="accent">.</span></h1>
-    <p class="hero-tagline">
-      High school <span class="hl">engineer & builder</span> passionate about
-      computer science, solving hard problems, and creating things that matter.
-    </p>
     <div class="hero-cta">
-      <a href="#contact" class="btn btn-primary">get in touch</a>
-      <a href="#experience" class="btn btn-secondary">view my work →</a>
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#experience" class="btn btn-ghost">View my work</a>
+    </div>
+  </div>
+
+  <div class="hero-terminal">
+    <div class="t-bar">
+      <div class="t-dot t-r"></div><div class="t-dot t-y"></div><div class="t-dot t-g"></div>
+      <span class="t-title">omair@woss ~ </span>
+    </div>
+    <div class="t-body">
+      <div><span class="t-p">$ </span>cat profile.json</div>
+      <div style="padding-left:0.7rem;color:#6b7280">{</div>
+      <div style="padding-left:1.4rem"><span class="t-k">"name"</span>: <span class="t-v">"Omair Jawaid"</span>,</div>
+      <div style="padding-left:1.4rem"><span class="t-k">"school"</span>: <span class="t-v">"White Oaks SS"</span>,</div>
+      <div style="padding-left:1.4rem"><span class="t-k">"grade"</span>: <span class="t-v">11</span>,</div>
+      <div style="padding-left:1.4rem"><span class="t-k">"city"</span>: <span class="t-v">"Oakville, ON"</span>,</div>
+      <div style="padding-left:1.4rem"><span class="t-k">"highlights"</span>: [</div>
+      <div style="padding-left:2.2rem"><span class="t-v">"Robotics Captain 8433X"</span>,</div>
+      <div style="padding-left:2.2rem"><span class="t-v">"DECA Ontario Champion"</span>,</div>
+      <div style="padding-left:2.2rem"><span class="t-v">"Rep Hockey 5+ yrs"</span>,</div>
+      <div style="padding-left:2.2rem"><span class="t-v">"BMT Club Co-Founder"</span></div>
+      <div style="padding-left:1.4rem">]</div>
+      <div style="padding-left:0.7rem;color:#6b7280">}</div>
+      <br>
+      <div><span class="t-p">$ </span><span class="t-c"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sh reveal">
+    <span class="sh-num">00</span>
+    <h2 class="sh-title">About</h2>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="about-wrap">
+    <div class="about-body reveal">
+      <p>I'm <strong>Omair Jawaid</strong>, a Grade 11 student at White Oaks Secondary School in Oakville, Ontario. I'm driven by a genuine interest in engineering, technology, and leadership.</p>
+      <p>I captain <strong>VEX Robotics Team 8433X</strong>, compete at the provincial level in <strong>DECA</strong> as an Ontario Champion (EIB), and co-founded my school's <strong>Business Meets Technology Club</strong>. I believe the best engineers also think like entrepreneurs.</p>
+      <p>Outside school I've played <strong>rep hockey</strong> at the Select and Advanced levels for five years, coach youth soccer and basketball, and stay involved in my community through mentorship and volunteering.</p>
+    </div>
+    <div class="about-stats reveal">
+      <div class="s-cell">
+        <div class="s-num">5+</div>
+        <div class="s-lab">Years Rep Hockey</div>
+      </div>
+      <div class="s-cell">
+        <div class="s-num">Champ</div>
+        <div class="s-lab">DECA Ontario EIB</div>
+      </div>
+      <div class="s-cell">
+        <div class="s-num">4+</div>
+        <div class="s-lab">Years Robotics</div>
+      </div>
+      <div class="s-cell">
+        <div class="s-num">6+</div>
+        <div class="s-lab">Leadership Roles</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sh reveal">
+    <span class="sh-num">01</span>
+    <h2 class="sh-title">Experience</h2>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="exp-list reveal">
+
+    <div class="exp-row">
+      <div class="exp-date-col">
+        Sep 2025 – Present
+        <div class="exp-org-name">Town of Oakville</div>
+      </div>
+      <div>
+        <div class="exp-role">Lead Youth Sports Coach</div>
+        <ul class="bullet-list"><li>Led soccer and basketball training sessions for youth athletes</li><li>Taught fundamentals, ran drills, and tracked player development</li><li>Managed group dynamics and maintained a team-focused environment</li></ul>
+      </div>
+      <span class="exp-badge badge-work">Work</span>
     </div>
 
-    <div class="hero-terminal">
-      <div class="terminal-bar">
-        <div class="t-dot t-red"></div>
-        <div class="t-dot t-yellow"></div>
-        <div class="t-dot t-green"></div>
-        <span class="terminal-title">omair@portfolio ~ </span>
+    <div class="exp-row">
+      <div class="exp-date-col">
+        Mar – Sep 2025
+        <div class="exp-org-name">Town of Oakville</div>
       </div>
-      <div class="terminal-body">
-        <div class="t-line"><span class="t-prompt">▶</span><span class="t-cmd"> whoami</span></div>
-        <div class="t-line"><span class="t-out"><span class="t-key">name:</span>    <span class="t-val">"Omair"</span></span></div>
-        <div class="t-line"><span class="t-out"><span class="t-key">grade:</span>   <span class="t-val">"High School Senior"</span></span></div>
-        <div class="t-line"><span class="t-out"><span class="t-key">focus:</span>   <span class="t-val">["CS", "Engineering"]</span></span></div>
-        <div class="t-line"><span class="t-out"><span class="t-key">mood:</span>    <span class="t-val">"building cool stuff 🚀"</span></span></div>
-        <br>
-        <div class="t-line"><span class="t-prompt">▶</span><span class="t-cmd"> ls projects/</span></div>
-        <div class="t-line"><span class="t-out" style="color:var(--blue)">app_v2/  &nbsp; hackathon_win/  &nbsp; research/</span></div>
-        <br>
-        <div class="t-line"><span class="t-prompt">▶</span><span class="t-cmd"> </span><span class="t-cursor"></span></div>
+      <div>
+        <div class="exp-role">Summer Camp Counselor</div>
+        <ul class="bullet-list"><li>Supervised campers across daily structured and free activities</li><li>Enforced safety protocols and resolved conflicts calmly</li><li>Fostered an inclusive and positive camp culture</li></ul>
       </div>
+      <span class="exp-badge badge-work">Work</span>
     </div>
-  </section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="section-header reveal">
-      <span class="section-num">01 //</span>
-      <h2 class="section-title">About Me</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <p>Hey! I'm <strong>Omair</strong> — a high school student who genuinely loves all things computer science and engineering. What started as curiosity about how software works turned into a full-on obsession with building things from scratch.</p>
-        <p>I thrive at the intersection of <strong>logic and creativity</strong> — whether that's debugging a gnarly algorithm at midnight or designing systems that are actually elegant. I believe good engineering is also good art.</p>
-        <p>When I'm not coding, I'm diving deep into math, exploring new frameworks, or competing in hackathons. I'm always looking for the next hard problem to solve.</p>
+    <div class="exp-row">
+      <div class="exp-date-col">
+        2024
+        <div class="exp-org-name">White Oaks SS</div>
       </div>
-      <div class="about-stats reveal">
-        <div class="stat-card">
-          <div class="stat-num">10+</div>
-          <div class="stat-label">Projects Built</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">3+</div>
-          <div class="stat-label">Hackathons Entered</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">5+</div>
-          <div class="stat-label">Languages Known</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">∞</div>
-          <div class="stat-label">Problems to Solve</div>
-        </div>
+      <div>
+        <div class="exp-role">Cat Crew Leader</div>
+        <ul class="bullet-list"><li>Led peer mentorship sessions for incoming Grade 9 students</li><li>Helped new students navigate schedules, expectations, and social dynamics</li><li>Built a welcoming community to ease the high school transition</li></ul>
       </div>
+      <span class="exp-badge badge-vol">Volunteer</span>
     </div>
-  </section>
 
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="section-header reveal">
-      <span class="section-num">02 //</span>
-      <h2 class="section-title">Skills</h2>
-      <div class="section-line"></div>
+    <div class="exp-row">
+      <div class="exp-date-col">
+        Mar – Dec 2024
+        <div class="exp-org-name">UCMAS Canada</div>
+      </div>
+      <div>
+        <div class="exp-role">Assistant Math Teacher</div>
+        <ul class="bullet-list"><li>Provided one-on-one math support and guided practice sessions</li><li>Assisted the lead teacher with lesson delivery and classroom management</li><li>Helped students build confidence and improve academic performance</li></ul>
+      </div>
+      <span class="exp-badge badge-work">Work</span>
     </div>
-    <div class="skills-grid">
-      <div class="skill-category reveal">
-        <div class="skill-cat-icon">💻</div>
-        <div class="skill-cat-title">LANGUAGES</div>
-        <div class="skill-tags">
-          <span class="tag">Python</span>
-          <span class="tag">Java</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">C++</span>
-          <span class="tag">HTML/CSS</span>
-          <span class="tag">SQL</span>
-        </div>
-      </div>
-      <div class="skill-category reveal">
-        <div class="skill-cat-icon">⚙️</div>
-        <div class="skill-cat-title">ENGINEERING</div>
-        <div class="skill-tags">
-          <span class="tag">Data Structures</span>
-          <span class="tag">Algorithms</span>
-          <span class="tag">OOP</span>
-          <span class="tag">System Design</span>
-          <span class="tag">Circuits</span>
-        </div>
-      </div>
-      <div class="skill-category reveal">
-        <div class="skill-cat-icon">🛠️</div>
-        <div class="skill-cat-title">TOOLS & FRAMEWORKS</div>
-        <div class="skill-tags">
-          <span class="tag">React</span>
-          <span class="tag">Git & GitHub</span>
-          <span class="tag">VS Code</span>
-          <span class="tag">Linux</span>
-          <span class="tag">Arduino</span>
-        </div>
-      </div>
-      <div class="skill-category reveal">
-        <div class="skill-cat-icon">🤖</div>
-        <div class="skill-cat-title">AI & DATA</div>
-        <div class="skill-tags">
-          <span class="tag">Machine Learning</span>
-          <span class="tag">NumPy</span>
-          <span class="tag">Pandas</span>
-          <span class="tag">Neural Nets</span>
-        </div>
-      </div>
-      <div class="skill-category reveal">
-        <div class="skill-cat-icon">🧮</div>
-        <div class="skill-cat-title">MATHEMATICS</div>
-        <div class="skill-tags">
-          <span class="tag">Calculus</span>
-          <span class="tag">Linear Algebra</span>
-          <span class="tag">Discrete Math</span>
-          <span class="tag">Statistics</span>
-        </div>
-      </div>
-      <div class="skill-category reveal">
-        <div class="skill-cat-icon">🌐</div>
-        <div class="skill-cat-title">WEB & OTHER</div>
-        <div class="skill-tags">
-          <span class="tag">REST APIs</span>
-          <span class="tag">Node.js</span>
-          <span class="tag">UI/UX Thinking</span>
-          <span class="tag">Technical Writing</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="section-header reveal">
-      <span class="section-num">03 //</span>
-      <h2 class="section-title">Experience</h2>
-      <div class="section-line"></div>
+    <div class="exp-row">
+      <div class="exp-date-col">
+        Apr 2023 – Sep 2024
+        <div class="exp-org-name">Oakville & Burlington SC</div>
+      </div>
+      <div>
+        <div class="exp-role">Soccer Referee</div>
+        <ul class="bullet-list"><li>Officiated competitive youth soccer matches across Oakville and Burlington</li><li>Enforced rules and managed on-field disputes with composure</li><li>Maintained fair play standards in high-pressure game environments</li></ul>
+      </div>
+      <span class="exp-badge badge-work">Work</span>
     </div>
-    <div class="exp-list">
-      <div class="exp-card reveal">
-        <div>
-          <div class="exp-role">Lead Developer — School App Project</div>
-          <div class="exp-org">Student Engineering Club</div>
-          <div class="exp-desc">Led a team of 4 students to design and build a full-stack web application for school resource management. Handled backend architecture, API design, and mentored junior developers on clean code practices.</div>
-        </div>
-        <div class="exp-date">2024 — Present</div>
-      </div>
-      <div class="exp-card reveal">
-        <div>
-          <div class="exp-role">CS Tutor & Peer Mentor</div>
-          <div class="exp-org">High School Math & CS Department</div>
-          <div class="exp-desc">Tutored 15+ classmates in Python, Java, and foundational algorithms. Developed custom practice problems and guided students from zero to building their own projects.</div>
-        </div>
-        <div class="exp-date">2023 — Present</div>
-      </div>
-      <div class="exp-card reveal">
-        <div>
-          <div class="exp-role">Hackathon Participant & Team Lead</div>
-          <div class="exp-org">Regional & National Hackathons</div>
-          <div class="exp-desc">Competed in multiple hackathons, leading teams to build MVPs in 24–48 hour sprints. Projects included an AI-powered study tool and an IoT-based campus safety system.</div>
-        </div>
-        <div class="exp-date">2023 — 2024</div>
-      </div>
-      <div class="exp-card reveal">
-        <div>
-          <div class="exp-role">Independent Research — ML Project</div>
-          <div class="exp-org">Self-directed</div>
-          <div class="exp-desc">Conducted independent research into machine learning classification models. Trained and evaluated models on real-world datasets, documented findings in a structured report.</div>
-        </div>
-        <div class="exp-date">2024</div>
-      </div>
-    </div>
-  </section>
 
-  <!-- AWARDS -->
-  <section id="awards">
-    <div class="section-header reveal">
-      <span class="section-num">04 //</span>
-      <h2 class="section-title">Awards</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="awards-grid">
-      <div class="award-card reveal">
-        <div class="award-icon">🏆</div>
-        <div>
-          <div class="award-title">Hackathon — 1st Place</div>
-          <div class="award-org">Regional Tech Competition</div>
-          <div class="award-desc">Won first place for building an AI-powered productivity tool that automatically organizes student schedules using NLP.</div>
-        </div>
-      </div>
-      <div class="award-card reveal">
-        <div class="award-icon">🥇</div>
-        <div>
-          <div class="award-title">AP Computer Science — Perfect Score</div>
-          <div class="award-org">College Board</div>
-          <div class="award-desc">Achieved a 5 on the AP CS A exam, demonstrating mastery of Java, OOP principles, and algorithmic thinking.</div>
-        </div>
-      </div>
-      <div class="award-card reveal">
-        <div class="award-icon">🎖️</div>
-        <div>
-          <div class="award-title">Coding Olympiad — Top 10%</div>
-          <div class="award-org">USACO / CCC</div>
-          <div class="award-desc">Ranked in the top 10% of national participants in a competitive programming olympiad, solving complex algorithmic challenges under time pressure.</div>
-        </div>
-      </div>
-      <div class="award-card reveal">
-        <div class="award-icon">⭐</div>
-        <div>
-          <div class="award-title">Engineering Excellence Award</div>
-          <div class="award-org">School Science & Engineering Fair</div>
-          <div class="award-desc">Recognized for outstanding engineering design in a project combining hardware and software to solve a real-world accessibility challenge.</div>
-        </div>
-      </div>
-      <div class="award-card reveal">
-        <div class="award-icon">📚</div>
-        <div>
-          <div class="award-title">Honor Roll — 4 Consecutive Years</div>
-          <div class="award-org">School Academic Achievement</div>
-          <div class="award-desc">Maintained a high GPA across all four years of high school while balancing extracurriculars, projects, and competitions.</div>
-        </div>
-      </div>
-      <div class="award-card reveal">
-        <div class="award-icon">🚀</div>
-        <div>
-          <div class="award-title">Best Technical Project</div>
-          <div class="award-org">School Demo Day</div>
-          <div class="award-desc">Selected as the best technical project at school demo day for a full-stack app serving real users in the school community.</div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="section-header reveal">
-      <span class="section-num">05 //</span>
-      <h2 class="section-title">Contact</h2>
-      <div class="section-line"></div>
+<!-- LEADERSHIP -->
+<section id="leadership">
+  <div class="sh reveal">
+    <span class="sh-num">02</span>
+    <h2 class="sh-title">Leadership & Clubs</h2>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="lead-grid reveal">
+    <div class="lead-cell">
+      <div class="lead-role">Team Captain — 8433X</div>
+      <div class="lead-org">White Oaks Robotics · Jul 2025 – Present</div>
+      <ul class="bullet-list"><li>Coordinate full build and competition cycle for Team 8433X</li><li>Assign tasks, set timelines, and drive strategic decisions</li><li>Mentor junior members on robot design and programming</li></ul>
     </div>
-    <div class="contact-wrapper">
-      <div class="reveal">
-        <p class="contact-intro">
-          Whether you want to collaborate on a project, have an opportunity to share, or just want to talk tech — my inbox is always open. Let's build something great together.
-        </p>
-        <div class="contact-links">
-          <a href="mailto:omair@email.com" class="contact-link">
-            <span class="cl-icon">📧</span> omair@email.com
-          </a>
-          <a href="https://github.com" target="_blank" class="contact-link">
-            <span class="cl-icon">🐙</span> github.com/omair
-          </a>
-          <a href="https://linkedin.com" target="_blank" class="contact-link">
-            <span class="cl-icon">💼</span> linkedin.com/in/omair
-          </a>
-        </div>
+    <div class="lead-cell">
+      <div class="lead-role">Co-Founder & President</div>
+      <div class="lead-org">Business Meets Technology Club · WOSS</div>
+      <ul class="bullet-list"><li>Co-founded and lead the club from the ground up</li><li>Organise workshops, speaker events, and collaborative projects</li><li>Bridge the gap between technical skills and business thinking</li></ul>
+    </div>
+    <div class="lead-cell">
+      <div class="lead-role">Treasurer & Grade Rep</div>
+      <div class="lead-org">Muslim Students Association · WOSS</div>
+      <ul class="bullet-list"><li>Managed club budget and tracked all MSA finances as Treasurer</li><li>Represented Grade 11 students in school government as Grade Rep</li><li>Organised community events and advocated for student needs</li></ul>
+    </div>
+    <div class="lead-cell">
+      <div class="lead-role">DECA Competitor — EIB</div>
+      <div class="lead-org">White Oaks DECA · Sep 2025 – Present</div>
+      <ul class="bullet-list"><li>Developed and presented an original business plan at provincials</li><li>Named Ontario Champion in the EIB category</li><li>Competed against hundreds of students province-wide</li></ul>
+    </div>
+    <div class="lead-cell">
+      <div class="lead-role">Electrathon EV Member</div>
+      <div class="lead-org">WOSS Electrathon Team</div>
+      <ul class="bullet-list"><li>Contribute to design and build of a student-built electric vehicle</li><li>Gain hands-on experience in EV systems and engineering tradeoffs</li><li>Collaborate with teammates to optimise for competition performance</li></ul>
+    </div>
+    <div class="lead-cell">
+      <div class="lead-role">General Member — 8433X</div>
+      <div class="lead-org">White Oaks Robotics · 2024 – Jun 2025</div>
+      <ul class="bullet-list"><li>Built and tested competitive robot components across two seasons</li><li>Coded autonomous and driver-control programs in C++</li><li>Troubleshot mechanical and software issues under competition pressure</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sh reveal">
+    <span class="sh-num">03</span>
+    <h2 class="sh-title">Projects</h2>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="proj-grid">
+    <div class="proj-card reveal">
+      <div class="proj-meta">
+        <span class="proj-cat">Personal Project</span>
+        <span class="proj-live">Live</span>
       </div>
-      <div class="contact-form reveal">
-        <div class="form-group">
-          <label>YOUR NAME</label>
-          <input type="text" placeholder="Ada Lovelace" />
-        </div>
-        <div class="form-group">
-          <label>EMAIL</label>
-          <input type="email" placeholder="ada@example.com" />
-        </div>
-        <div class="form-group">
-          <label>MESSAGE</label>
-          <textarea placeholder="Hey Omair, let's collaborate on..."></textarea>
-        </div>
-        <button class="btn btn-primary" style="align-self:flex-start;" onclick="this.textContent='sent! ✓'; this.style.background='var(--green)'">send message</button>
+      <div class="proj-name">BrickMate</div>
+      <div class="proj-desc">An AI-powered LEGO set builder built with Claude. Users take a photo of their available LEGO pieces, Claude's vision identifies every brick in the image, and BrickMate returns a variety of complete sets that can be built using exactly those pieces — no extras needed. Built using the Anthropic API with a clean, interactive web interface.</div>
+      <div class="proj-tags">
+        <span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JavaScript</span>
+        <span class="ptag">Anthropic API</span><span class="ptag">GitHub Pages</span>
       </div>
     </div>
-  </section>
+    <div class="proj-card tbd reveal">
+      <div class="proj-meta">
+        <span class="proj-cat">Personal Project</span>
+        <span class="proj-soon">Coming Soon</span>
+      </div>
+      <div class="proj-name">Next Project</div>
+      <div class="proj-desc">Something new is in the works. Always building — check back soon.</div>
+      <div class="proj-tags">
+        <span class="ptag">TBD</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>designed & built by <span>Omair</span> · © 2025 · made with 💚 and lots of ☕</p>
-  </footer>
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sh reveal">
+    <span class="sh-num">04</span>
+    <h2 class="sh-title">Skills</h2>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="skills-wrap reveal">
+    <div class="sk-cell">
+      <div class="sk-label">Programming</div>
+      <div class="sk-tags">
+        <span class="sk-tag">C++</span><span class="sk-tag">Python</span><span class="sk-tag">Java</span>
+        <span class="sk-tag">JavaScript</span><span class="sk-tag">HTML / CSS</span>
+      </div>
+    </div>
+    <div class="sk-cell">
+      <div class="sk-label">Robotics & Engineering</div>
+      <div class="sk-tags">
+        <span class="sk-tag">VEX Robotics</span><span class="sk-tag">CAD / Design</span>
+        <span class="sk-tag">3D Printing</span><span class="sk-tag">Prototyping</span>
+        <span class="sk-tag">Electrathon EV</span>
+      </div>
+    </div>
+    <div class="sk-cell">
+      <div class="sk-label">Business</div>
+      <div class="sk-tags">
+        <span class="sk-tag">Business Planning</span><span class="sk-tag">Entrepreneurship</span>
+        <span class="sk-tag">Presentations</span><span class="sk-tag">Finance</span>
+      </div>
+    </div>
+    <div class="sk-cell">
+      <div class="sk-label">Leadership</div>
+      <div class="sk-tags">
+        <span class="sk-tag">Team Management</span><span class="sk-tag">Mentorship</span>
+        <span class="sk-tag">Public Speaking</span><span class="sk-tag">Strategy</span>
+      </div>
+    </div>
+    <div class="sk-cell">
+      <div class="sk-label">Mathematics</div>
+      <div class="sk-tags">
+        <span class="sk-tag">Calculus</span><span class="sk-tag">Discrete Math</span>
+        <span class="sk-tag">Statistics</span><span class="sk-tag">Algorithms</span>
+      </div>
+    </div>
+    <div class="sk-cell">
+      <div class="sk-label">Coaching & Teaching</div>
+      <div class="sk-tags">
+        <span class="sk-tag">Youth Coaching</span><span class="sk-tag">Math Tutoring</span>
+        <span class="sk-tag">Group Instruction</span><span class="sk-tag">Refereeing</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script>
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, 80 * (Array.from(entry.target.parentElement.children).indexOf(entry.target)));
-          observer.unobserve(entry.target);
+<!-- AWARDS -->
+<section id="awards">
+  <div class="sh reveal">
+    <span class="sh-num">05</span>
+    <h2 class="sh-title">Awards</h2>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="awards-list reveal">
+    <div class="award-row feat">
+      <div>
+        <div class="award-name">DECA Ontario Champion — EIB</div>
+        <div class="award-org">DECA Ontario · Provincial Competition</div>
+        <div class="award-desc">Ranked Provincial Champion in the Entrepreneurship: Independent Business Plan event, competing against hundreds of students province-wide.</div>
+      </div>
+      <span class="award-tag">Featured</span>
+    </div>
+    <div class="award-row feat">
+      <div>
+        <div class="award-name">VEX Provincial Championship Finalist</div>
+        <div class="award-org">VEX Robotics · Ontario Provincials</div>
+        <div class="award-desc">Qualified for and competed at the VEX Robotics Provincial Championship as a finalist, representing White Oaks 8433X through strong robot performance and team strategy.</div>
+      </div>
+      <span class="award-tag">Featured</span>
+    </div>
+    <div class="award-row">
+      <div>
+        <div class="award-name">VEX Robotics Regional Awards</div>
+        <div class="award-org">VEX Robotics Competitions</div>
+        <div class="award-desc">Earned multiple awards across regional VEX competitions including performance, design, and sportsmanship recognitions across two seasons.</div>
+      </div>
+    </div>
+    <div class="award-row">
+      <div>
+        <div class="award-name">Excellence in Leadership</div>
+        <div class="award-org">White Oaks Secondary School</div>
+        <div class="award-desc">Recognized for outstanding leadership contributions across robotics, student government, and community initiatives.</div>
+      </div>
+    </div>
+    <div class="award-row">
+      <div>
+        <div class="award-name">Consistent Academic Achievement</div>
+        <div class="award-org">White Oaks Secondary School</div>
+        <div class="award-desc">Maintained strong academics while balancing intensive extracurriculars in robotics, DECA, athletics, and work.</div>
+      </div>
+    </div>
+</div>
+  </div>
+</section>
+
+<!-- ATHLETICS -->
+<section id="athletics">
+  <div class="sh reveal">
+    <span class="sh-num">06</span>
+    <h2 class="sh-title">Athletics</h2>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="ath-wrap">
+    <div class="ath-hero reveal">
+      <div class="ath-accent-bar"></div>
+      <div>
+        <div class="ath-hero-title">Rep Hockey — Select & Advanced</div>
+        <div class="ath-hero-sub">5+ Years · Competitive Hockey</div>
+        <div class="ath-hero-desc">Competed at the Select and Advanced rep levels for over five years. The discipline, composure under pressure, and team communication developed on the ice carry directly into how I approach robotics, DECA, and every challenge I take on.</div>
+      </div>
+    </div>
+    <div class="ath-card reveal">
+      <div class="ath-label">Experience</div>
+      <div class="ath-val">Select & Advanced Rep</div>
+      <div class="ath-desc">Competed at rep level continuously throughout minor hockey, year over year.</div>
+    </div>
+    <div class="ath-card reveal">
+      <div class="ath-label">Other Sports</div>
+      <div class="ath-val">Soccer & Basketball</div>
+      <div class="ath-desc">Certified soccer referee and certified youth coach for soccer and basketball through the Town of Oakville.</div>
+    </div>
+    <div class="ath-card reveal">
+      <div class="ath-label">Transferable Skills</div>
+      <div class="ath-val">High-Pressure Performance</div>
+      <div class="ath-desc">Competitive sport builds the same mindset I bring to engineering — composure, strategy, and clear communication under pressure.</div>
+    </div>
+    <div class="ath-card reveal">
+      <div class="ath-label">Giving Back</div>
+      <div class="ath-val">Lead Youth Coach</div>
+      <div class="ath-desc">Coaching the next generation of athletes through the Town of Oakville's youth sports programs.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sh reveal">
+    <span class="sh-num">07</span>
+    <h2 class="sh-title">Contact</h2>
+    <div class="sh-rule"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <p class="contact-lede">Whether you want to collaborate on a project, share an opportunity, or just talk engineering and business — I'd love to connect.</p>
+      <div class="contact-links">
+        <a href="/cdn-cgi/l/email-protection#b9d6d3d8ced8d0dd8b898880f9ded4d8d0d597dad6d4" class="c-link">
+          <div>
+            <div class="c-link-label">Email</div>
+            <span class="__cf_email__" data-cfemail="157a7f7462747c712725242c557278747c793b767a78">[email&#160;protected]</span>
+          </div>
+          <span class="c-arrow">→</span>
+        </a>
+        <a href="https://www.linkedin.com/in/omair-jawaid-4a7820314" target="_blank" class="c-link">
+          <div>
+            <div class="c-link-label">LinkedIn</div>
+            linkedin.com/in/omair-jawaid
+          </div>
+          <span class="c-arrow">→</span>
+        </a>
+        <a href="https://github.com" target="_blank" class="c-link">
+          <div>
+            <div class="c-link-label">GitHub</div>
+            github.com/omair
+          </div>
+          <span class="c-arrow">→</span>
+        </a>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="fg">
+        <label>Name</label>
+        <input type="text" placeholder="Your name" />
+      </div>
+      <div class="fg">
+        <label>Email</label>
+        <input type="email" placeholder="your@email.com" />
+      </div>
+      <div class="fg">
+        <label>Message</label>
+        <textarea placeholder="Hey Omair..."></textarea>
+      </div>
+      <button class="btn btn-primary" style="align-self:flex-start;" onclick="this.textContent='Sent';this.style.cursor='default';">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-name">Omair Jawaid</div>
+  <div class="ft-copy">Oakville, ON · 2026</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const siblings = Array.from(entry.target.parentElement.children);
+        const i = siblings.indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), Math.min(i * 55, 240));
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.07 });
+  reveals.forEach(el => io.observe(el));
+
+  // Tab active state on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const tabLinks = document.querySelectorAll('.tab-link');
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tabLinks.forEach(a => a.classList.remove('active'));
+        const match = document.querySelector('.tab-link[href="#' + entry.target.id + '"]');
+        if (match) {
+          match.classList.add('active');
+          match.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-
-    // Typing effect for terminal
-    const cmds = document.querySelectorAll('.t-cmd');
-  </script>
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => sectionObserver.observe(s));
+</script>
 </body>
 </html>
