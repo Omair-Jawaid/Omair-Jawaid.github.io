@@ -693,10 +693,10 @@
     <div class="reveal">
       <p class="contact-lede">Whether you want to collaborate on a project, share an opportunity, or just talk engineering and business — I'd love to connect.</p>
       <div class="contact-links">
-        <a href="mailto:ojawaid2019@gmail.com" class="c-link">
+        <a href="/cdn-cgi/l/email-protection#37585d5640565e530507060e77505a565e5b1954585a" class="c-link">
           <div>
             <div class="c-link-label">Email</div>
-            ojawaid2019@gmail.com
+            <span class="__cf_email__" data-cfemail="335c595244525a570103020a73545e525a5f1d505c5e">[email&#160;protected]</span>
           </div>
           <span class="c-arrow">→</span>
         </a>
@@ -716,21 +716,21 @@
         </a>
       </div>
     </div>
-    <div class="contact-form reveal">
+    <form class="contact-form reveal" action="https://formspree.io/f/xojkwkqn" method="POST">
       <div class="fg">
         <label>Name</label>
-        <input type="text" placeholder="Your name" />
+        <input type="text" name="name" placeholder="Your name" required />
       </div>
       <div class="fg">
         <label>Email</label>
-        <input type="email" placeholder="your@email.com" />
+        <input type="email" name="email" placeholder="your@email.com" required />
       </div>
       <div class="fg">
         <label>Message</label>
-        <textarea placeholder="Hey Omair..."></textarea>
+        <textarea name="message" placeholder="Hey Omair..." required></textarea>
       </div>
-      <button class="btn btn-primary" style="align-self:flex-start;" onclick="this.textContent='Sent';this.style.cursor='default';">Send Message</button>
-    </div>
+      <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Send Message</button>
+    </form>
   </div>
 </section>
 
@@ -739,7 +739,7 @@
   <div class="ft-copy">Oakville, ON · 2026</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -753,7 +753,6 @@
   }, { threshold: 0.07 });
   reveals.forEach(el => io.observe(el));
 
-  // Tab active state on scroll
   const sections = document.querySelectorAll('section[id]');
   const tabLinks = document.querySelectorAll('.tab-link');
   const sectionObserver = new IntersectionObserver((entries) => {
